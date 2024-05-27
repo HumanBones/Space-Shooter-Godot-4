@@ -1,0 +1,164 @@
+[gd_scene load_steps=20 format=3 uid="uid://djinfmn6xi8j7"]
+
+[ext_resource type="Texture2D" uid="uid://c1dfks5p5nav6" path="res://Assets/Ship/Spaceships.png" id="1_1imsu"]
+[ext_resource type="Script" path="res://Scenes/Player/player.gd" id="1_06kph"]
+[ext_resource type="Texture2D" uid="uid://p4rtv8q850m6" path="res://Assets/VFX/Thruster_01.png" id="2_vqoip"]
+[ext_resource type="Texture2D" uid="uid://yhkbmi7pmsm7" path="res://Assets/VFX/Explosion.png" id="4_bi2ac"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_570al"]
+atlas = ExtResource("2_vqoip")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hfkmr"]
+atlas = ExtResource("2_vqoip")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0o06p"]
+atlas = ExtResource("2_vqoip")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fukta"]
+atlas = ExtResource("2_vqoip")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_vginc"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_570al")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hfkmr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0o06p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fukta")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 15.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_yb01s"]
+radius = 18.0278
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2tqlg"]
+atlas = ExtResource("4_bi2ac")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ehnai"]
+atlas = ExtResource("4_bi2ac")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sm8d2"]
+atlas = ExtResource("4_bi2ac")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ky82h"]
+atlas = ExtResource("4_bi2ac")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bu7b8"]
+atlas = ExtResource("4_bi2ac")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n53jg"]
+atlas = ExtResource("4_bi2ac")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ku4e0"]
+atlas = ExtResource("4_bi2ac")
+region = Rect2(192, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_31nim"]
+atlas = ExtResource("4_bi2ac")
+region = Rect2(224, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3lq1n"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2tqlg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ehnai")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sm8d2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ky82h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bu7b8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n53jg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ku4e0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_31nim")
+}],
+"loop": false,
+"name": &"Explode",
+"speed": 10.0
+}]
+
+[node name="Player" type="CharacterBody2D" groups=["player"]]
+script = ExtResource("1_06kph")
+max_speed = 200.0
+max_hp = 5
+fire_rate = 0.2
+
+[node name="MainSprites" type="Node2D" parent="."]
+
+[node name="Thrusters" type="Node2D" parent="MainSprites"]
+position = Vector2(0, -3)
+
+[node name="ThrusterL" type="AnimatedSprite2D" parent="MainSprites/Thrusters"]
+position = Vector2(-6, 21)
+rotation = 1.5708
+sprite_frames = SubResource("SpriteFrames_vginc")
+animation = &"idle"
+autoplay = "idle"
+frame = 3
+frame_progress = 0.524726
+
+[node name="ThrusterR" type="AnimatedSprite2D" parent="MainSprites/Thrusters"]
+position = Vector2(8, 21)
+rotation = 1.5708
+sprite_frames = SubResource("SpriteFrames_vginc")
+animation = &"idle"
+autoplay = "idle"
+frame = 3
+frame_progress = 0.524726
+
+[node name="Sprite2D" type="Sprite2D" parent="MainSprites"]
+rotation = -1.5708
+texture = ExtResource("1_1imsu")
+hframes = 5
+vframes = 3
+frame = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 5)
+shape = SubResource("CircleShape2D_yb01s")
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="Marker2D" type="Marker2D" parent="."]
+position = Vector2(0, -13)
+
+[node name="Explode" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_3lq1n")
+animation = &"Explode"
+autoplay = "Explode"
+frame = 7
+frame_progress = 0.604052
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="animation_finished" from="Explode" to="." method="_on_explode_animation_finished"]

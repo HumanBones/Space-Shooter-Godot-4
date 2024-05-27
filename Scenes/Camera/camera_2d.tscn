@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://j5m63fg3vrce"]
+
+[ext_resource type="Script" path="res://Scenes/Camera/camera_2d.gd" id="1_qpd0q"]
+
+[node name="Camera2D" type="Camera2D"]
+anchor_mode = 0
+script = ExtResource("1_qpd0q")
+random_stren = 5.0
+shake_fade = 10.0

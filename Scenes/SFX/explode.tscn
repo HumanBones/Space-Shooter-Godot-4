@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://cg1hx6uvge4i4"]
+
+[ext_resource type="AudioStream" uid="uid://dgbv6bbmlgsgo" path="res://Assets/SFX/explosion.wav" id="1_dqs8u"]
+[ext_resource type="Script" path="res://Scenes/SFX/explode.gd" id="2_jcp5h"]
+
+[node name="Explode" type="AudioStreamPlayer2D"]
+stream = ExtResource("1_dqs8u")
+autoplay = true
+script = ExtResource("2_jcp5h")
+
+[connection signal="finished" from="." to="." method="_on_finished"]

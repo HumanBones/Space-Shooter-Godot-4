@@ -1,0 +1,70 @@
+[gd_scene load_steps=10 format=3 uid="uid://oqqdb8sdojc3"]
+
+[ext_resource type="Script" path="res://Scenes/Bullet/bullet.gd" id="1_633l3"]
+[ext_resource type="Texture2D" uid="uid://b5nuujh42tkwj" path="res://Assets/Bullet/Fx_04.png" id="2_le6un"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_p3bor"]
+
+[sub_resource type="Gradient" id="Gradient_obl88"]
+colors = PackedColorArray(0.972549, 0.690196, 0.980392, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_iq2lh"]
+gradient = SubResource("Gradient_obl88")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_3g3qc"]
+lifetime_randomness = 0.2
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(5, 1, 1)
+spread = 0.0
+gravity = Vector3(0, 100, 0)
+linear_accel_max = 100.0
+scale_max = 2.0
+color_ramp = SubResource("GradientTexture1D_iq2lh")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b1x7v"]
+atlas = ExtResource("2_le6un")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cfsq2"]
+atlas = ExtResource("2_le6un")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3dq31"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b1x7v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cfsq2")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[node name="Bullet" type="Area2D"]
+script = ExtResource("1_633l3")
+max_speed = 500.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_p3bor")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+process_material = SubResource("ParticleProcessMaterial_3g3qc")
+lifetime = 0.4
+speed_scale = 1.2
+randomness = 0.5
+
+[node name="Sprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(1.13687e-13, -9)
+rotation = -1.5708
+scale = Vector2(0.7, 0.7)
+sprite_frames = SubResource("SpriteFrames_3dq31")
+autoplay = "default"
+frame_progress = 0.493455
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

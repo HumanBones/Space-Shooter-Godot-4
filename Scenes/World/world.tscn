@@ -1,0 +1,34 @@
+[gd_scene load_steps=7 format=3 uid="uid://bbagwtu13m7ac"]
+
+[ext_resource type="Script" path="res://Scenes/World/world.gd" id="1_g4w0b"]
+[ext_resource type="Texture2D" uid="uid://hbebu7itmxb3" path="res://Assets/BG/Space_bg.png" id="2_2mv14"]
+[ext_resource type="PackedScene" uid="uid://djinfmn6xi8j7" path="res://Scenes/Player/player.tscn" id="2_4t1jt"]
+[ext_resource type="PackedScene" uid="uid://j5m63fg3vrce" path="res://Scenes/Camera/camera_2d.tscn" id="3_m8ghf"]
+[ext_resource type="PackedScene" uid="uid://dbwk6uhk8w66v" path="res://Scenes/Spawner/spawner.tscn" id="3_q265f"]
+[ext_resource type="PackedScene" uid="uid://bi3e51fvdagii" path="res://Scenes/Asteroids/meteor.tscn" id="4_k17ja"]
+
+[node name="World" type="Node2D"]
+script = ExtResource("1_g4w0b")
+
+[node name="Sprite2D" type="TextureRect" parent="."]
+modulate = Color(0.705882, 0.564706, 0.521569, 1)
+offset_right = 640.0
+offset_bottom = 360.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("2_2mv14")
+expand_mode = 2
+stretch_mode = 2
+
+[node name="AsteroidHolder" type="Node2D" parent="." groups=["holder"]]
+
+[node name="Player" parent="." node_paths=PackedStringArray("bullet_holder") instance=ExtResource("2_4t1jt")]
+position = Vector2(329, 273)
+bullet_holder = NodePath("../BulletHolder")
+
+[node name="Camera2D" parent="." instance=ExtResource("3_m8ghf")]
+
+[node name="Spawner" parent="." instance=ExtResource("3_q265f")]
+asteroid_scene = ExtResource("4_k17ja")
+
+[node name="BulletHolder" type="Node2D" parent="."]
